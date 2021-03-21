@@ -74,6 +74,7 @@ public class TestController {
 		return source;
 	}
 	
+	
 	//전체 소스 리스트만 긁어오기
 	@GetMapping("getAll")
 	public Map<String, Object> getAll() throws IOException{
@@ -91,22 +92,38 @@ public class TestController {
 	}
 	
 	
+	//비즈니스로직 분리해서 로컬 테스트
 	
-	//비즈니스로직 분리 
-	@GetMapping("serviceTest")
-	public Map<String, Object> serviceTest() throws IOException{
+	//인덱스 id로 조회
+	@GetMapping("serviceTest/{id}")
+	public Map<String, Object> serviceTest(@PathVariable("id") String id) throws IOException{
 		Map<String, Object> list = new HashMap<String, Object>();
-		String id = "2";
 		ESS.listOne(id);
 		list.put("list", ESS.listOne(id));
 		return list;
 	}
 	
-	
+	//해당 인덱스 데이터 전체조회
 	@GetMapping("serviceTest2")
 	public Map<String, Object> serviceTest2() throws IOException{
-		return ESS.listAll();
+	return ESS.listAll();
 	}
+	
+	//field : value 검색 기능
+	@GetMapping("serviceTest3/{name}")
+	public Map<String, Object> serviceTest3(@PathVariable("name") String name) throws IOException{
+		return ESS.listAll2(name);
+	}
+	
+	
+	//field : value로 다중 검색 기능
+	@GetMapping("serviceTest4")
+	public Map<String, Object> serviceTest4(String name1,String name2) throws IOException{
+		name1 ="김건희555555";
+		name2 ="김건희4";
+		return ESS.listAll3(name1,name2);
+	}
+	
 	
 }
 	
