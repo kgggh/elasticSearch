@@ -32,7 +32,7 @@ public class EsService {
             RestClient.builder(
                     new HttpHost(severName, port, domain))); 
 	
-	//인덱스 id로 조회
+	//인덱스 id로 조회(1개)
 	
 	public Map<String, Object> listOne(String id) throws IOException{
 		GetSourceRequest GetSourceRequest = new GetSourceRequest("test", id); //index,id 값 입력

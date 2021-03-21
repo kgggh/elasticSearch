@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.test.crawling.ScrapingService;
 import com.test.es.EsService;
 
 @RestController
@@ -31,6 +32,9 @@ public class TestController {
 	
 	@Autowired
 	private EsService ESS;
+	
+	@Autowired
+	private ScrapingService scrapingService;
 
 	@GetMapping("/")
 	public String test() {
@@ -124,6 +128,19 @@ public class TestController {
 		return ESS.listAll3(name1,name2);
 	}
 	
+	
+	@GetMapping("serviceTest5")
+	public Map<String, Object> crawl() throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("test",scrapingService.stockList());
+		return map;
+	}
+	@GetMapping("serviceTest6")
+	public Map<String, Object> crawl2() throws Exception{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("test",scrapingService.getKoreaCovidDatas());
+		return map;
+	}
 	
 }
 	
